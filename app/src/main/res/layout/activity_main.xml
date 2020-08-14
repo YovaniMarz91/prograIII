@@ -84,6 +84,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Division" />
+        <RadioButton
+            android:id="@+id/optPorcentaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Porcentaje" />
+        <RadioButton
+            android:id="@+id/optResiduo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Residuo" />
     </RadioGroup>
     <Spinner
         android:id="@+id/cboOperaciones"
