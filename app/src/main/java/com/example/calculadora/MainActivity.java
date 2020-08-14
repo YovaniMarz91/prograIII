@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
                 case R.id.optSuma:
                     respuesta = num1 + num2;
 
+
                     break;
                 case R.id.optResta:
                     respuesta = num1 - num2;
