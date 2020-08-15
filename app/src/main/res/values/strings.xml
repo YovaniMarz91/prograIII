@@ -5,5 +5,7 @@
         <item>resta</item>
         <item>multiplicacion</item>
         <item>division</item>
+        <item>Porcentaje</item>
+        <item>Residuo</item>
     </string-array>
 </resources>

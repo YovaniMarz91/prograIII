@@ -35,14 +35,10 @@ public class MainActivity extends Activity {
             tempVal = (TextView) findViewById(R.id.txtnum2);
             double num2 = Double.parseDouble(tempVal.getText().toString());
             double respuesta = 0;
-            float c,r;
             //radiogroup y los radiobuttons
             switch (optOperaciones.getCheckedRadioButtonId()) {
                 case R.id.optSuma:
                     respuesta = num1 + num2;
-
-
-
                     break;
                 case R.id.optResta:
                     respuesta = num1 - num2;
@@ -58,6 +54,7 @@ public class MainActivity extends Activity {
                     break;
                 case R.id.optResiduo:
                     respuesta = num1 % num2;
+                    break;
             }
             //Spinner
             switch (cboOperaciones.getSelectedItemPosition()){
@@ -72,6 +69,12 @@ public class MainActivity extends Activity {
                     break;
                 case 4: //division
                     respuesta = num1 / num2;
+                    break;
+                case 5: //Porcentaje
+                    respuesta = (num1*num2)/100;
+                    break;
+                case 6: //Residuo
+                    respuesta = num1 % num2;
                     break;
             }
             tempVal = (TextView) findViewById(R.id.lblRespuesta);
