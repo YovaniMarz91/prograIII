@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">App clase</string>
+<string-array name="deptos">
+    <item>San salvador</item>
+    <item>La libertad</item>
+    <item>Ahuachapan</item>
+    <item>Santa Ana</item>
+    <item>Sonsonate</item>
+    <item>Cuscatlan</item>
+    <item>Chalatenango</item>
+    <item>Cabañas</item>
+    <item>San vicente</item>
+    <item>Usulutan</item>
+    <item>San Miguel</item>
+    <item>Morazan</item>
+    <item>La union</item>
+    <item>La paz</item>
+</string-array>
+
+</resources>
