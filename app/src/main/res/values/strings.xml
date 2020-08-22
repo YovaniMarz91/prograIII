@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Conversores</string>
+    <string-array name="operaciones">
+        <item>Euro</item>
+        <item>Dolar</item>
+        <item>Quetzal</item>
+        <item>Lempira</item>
+        <item>Cordoba</item>
+        <item>Colon SV</item>
+        <item>Colon CR</item>
+    </string-array>
+    <string-array name="operaciones2">
+        <item>Centimetro</item>
+        <item>Milimetro</item>
+        <item>Metro</item>
+        <item>Kilometro</item>
+        <item>Milla</item>
+        <item>Yarda</item>
+        <item>Pulgada</item>
+    </string-array>
+    <string-array name="operaciones3">
+        <item>Gramo</item>
+        <item>Kilogramo</item>
+        <item>Miligramo</item>
+        <item>Libra</item>
+        <item>Onza</item>
+        <item>Tonelada</item>
+    </string-array>
+</resources>
