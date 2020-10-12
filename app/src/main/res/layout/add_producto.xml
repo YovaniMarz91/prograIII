@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/txtcodigo"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:hint="CODIGO"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/txtproducto"
+        android:layout_marginTop="120dp"
+        android:layout_width="match_parent"
+        android:hint="Producto"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/txtmarca"
+        android:layout_marginTop="180dp"
+        android:layout_width="match_parent"
+        android:hint="Marca"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/txtpresentacion"
+        android:layout_marginTop="240dp"
+        android:layout_width="match_parent"
+        android:hint="Presentacion"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnGuardarProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="360dp"
+        android:text="Guardar"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnMostrarProducto"
+        android:src="@android:drawable/ic_menu_revert"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>
