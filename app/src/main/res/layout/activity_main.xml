@@ -11,13 +11,13 @@
         android:layout_height="60dp"/>
 
     <ListView
-        android:id="@+id/ltsAgendaProductosCouchDB"
+        android:id="@+id/ltsProductosCouchDB"
         android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAgregarProducto"
+        android:id="@+id/btnAgregarProductos"
         android:src="@android:drawable/ic_input_add"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

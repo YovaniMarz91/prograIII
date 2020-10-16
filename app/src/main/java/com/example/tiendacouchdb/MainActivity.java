@@ -1,7 +1,5 @@
 package com.example.tiendacouchdb;
 
-import androidx.annotation.NonNull;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -20,6 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -27,8 +27,11 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -40,7 +43,6 @@ public class MainActivity extends Activity {
     ArrayList<String> arrayList =new ArrayList<String>();
     ArrayList<String> copyStringArrayList = new ArrayList<String>();
     ArrayAdapter<String> stringArrayAdapter;
-    Bundle parametros =new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,17 +52,17 @@ public class MainActivity extends Activity {
         obtenerDatosProductos objObtenerProductos = new obtenerDatosProductos();
         objObtenerProductos.execute();
 
-        FloatingActionButton btn=(FloatingActionButton)findViewById(R.id.btnAgregarProducto);
-        btn.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton btnAgregarNuevoProductos = findViewById(R.id.btnAgregarProductos);
+        btnAgregarNuevoProductos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parametros.putString("accion", "nuevo");
-                nuevo_agenda();
+                agregarNuevosProductos("nuevo", jsonObject);
             }
         });
+        buscarProducto();
     }
     void buscarProducto(){
-        final TextView tempVal = (TextView) findViewById(R.id.txtBuscarProducto);
+        final TextView tempVal = (TextView)findViewById(R.id.txtBuscarProducto);
         tempVal.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -100,23 +102,16 @@ public class MainActivity extends Activity {
 
         }
     }
-    public void nuevo_agenda() {
-        Intent agregar_agenda = new Intent(MainActivity.this, com.example.tiendacouchdb.agregar_producto.class);
-        agregar_agenda.putExtras(parametros);
-        startActivity(agregar_agenda);
-    }
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.mnxAgregarProducto:
-                parametros.putString("accion","nuevo");
-                nuevo_agenda();
+                agregarNuevosProductos("nuevo", jsonObject);
                 return true;
 
             case R.id.mnxModificarProducto:
                 try {
-                    parametros.putString("valores",datosJSON.getJSONObject(posicion).getString("_id"));
-                    nuevo_agenda();
+                    agregarNuevosProductos("modificar", datosJSON.getJSONObject(posicion));
                 }catch (Exception ex){}
                 return true;
 
@@ -167,7 +162,7 @@ public class MainActivity extends Activity {
         }
     }
     private void mostrarDatosProductos(){
-        ListView ltsProductos = findViewById(R.id.ltsAgendaProductosCouchDB);
+        ListView ltsProductos = findViewById(R.id.ltsProductosCouchDB);
         try {
             arrayList.clear();
             stringArrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, arrayList);
@@ -191,7 +186,7 @@ public class MainActivity extends Activity {
             enviarParametros.putString("accion",accion);
             enviarParametros.putString("dataProducto",jsonObject.toString());
 
-            Intent agregarProducto = new Intent(MainActivity.this, agregar_producto.class);
+            Intent agregarProducto = new Intent(MainActivity.this, agregar_productos.class);
             agregarProducto.putExtras(enviarParametros);
             startActivity(agregarProducto);
         }catch (Exception e){

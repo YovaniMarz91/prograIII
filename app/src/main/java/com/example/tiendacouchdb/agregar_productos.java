@@ -1,17 +1,17 @@
 package com.example.tiendacouchdb;
 
-import android.app.Activity;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONObject;
@@ -25,63 +25,26 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
-
-public class agregar_producto extends Activity {
+public class agregar_productos extends AppCompatActivity {
     String resp, accion, id, rev;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_producto);
+        setContentView(R.layout.agregar_productos);
 
         try {
-            FloatingActionButton btnMostrarProductos = findViewById(R.id.btnMostrarProducto);
+            FloatingActionButton btnMostrarProductos = findViewById(R.id.btnMostrarProductos);
             btnMostrarProductos.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mostrarProductos();
                 }
             });
-            Button btn=(Button)findViewById(R.id.btnAgregarProducto);
-            btn .setOnClickListener(new View.OnClickListener() {
+            Button btnGuardarProducto = findViewById(R.id.btnGuardarProductos);
+            btnGuardarProducto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TextView temp=(TextView) findViewById(R.id.txtcodigo);
-                    String codigo=temp.getText().toString();
-
-                    temp=(TextView)findViewById(R.id.txtproducto);
-                    String producto=temp.getText().toString();
-
-                    temp=(TextView)findViewById(R.id.txtmarca);
-                    String marca=temp.getText().toString();
-
-                    temp=(TextView)findViewById(R.id.txtpresentacion);
-                    String presentacion=temp.getText().toString();
-
-                    //crear jsonobject aqui
-                    JSONObject miData=new JSONObject();
-
-                    try{
-                        if(accion.equals("modificar")){
-                            miData.put("_id",id);
-                            miData.put("_rev",rev);
-                            miData.put("codigo",codigo);
-                            miData.put("producto",producto);
-                            miData.put("marca",marca);
-                            miData.put("presenetacion",presentacion);
-
-                            enviarDatosProducto objEnviar=new enviarDatosProducto();
-                            objEnviar.execute(miData.toString());
-
-
-                        }
-
-                    } catch (Exception e) {
-                        Toast.makeText(agregar_producto.this,"Error al guardar datos"+e.getMessage().toString(),Toast.LENGTH_LONG).show();
-
-                    }
-
-
+                    guardarProducto();
                 }
             });
             mostrarDatosProducto();
@@ -96,17 +59,20 @@ public class agregar_producto extends Activity {
             if (accion.equals("modificar")){
                 JSONObject dataProducto = new JSONObject(recibirParametros.getString("dataProducto")).getJSONObject("value");
 
-                TextView tempVal = (TextView)findViewById(R.id.txtcodigo);
+                TextView tempVal = (TextView)findViewById(R.id.txtCodigoProducto);
                 tempVal.setText(dataProducto.getString("codigo"));
 
-                tempVal = (TextView)findViewById(R.id.txtproducto);
+                tempVal = (TextView)findViewById(R.id.txtNombreProducto);
                 tempVal.setText(dataProducto.getString("nombre"));
 
-                tempVal = (TextView)findViewById(R.id.txtmarca);
+                tempVal = (TextView)findViewById(R.id.txtDescripcionProducto);
                 tempVal.setText(dataProducto.getString("descripcion"));
 
-                tempVal = (TextView)findViewById(R.id.txtpresentacion);
+                tempVal = (TextView)findViewById(R.id.txtMarcaProducto);
                 tempVal.setText(dataProducto.getString("marca"));
+
+                tempVal = (TextView)findViewById(R.id.txtPrecioProducto);
+                tempVal.setText(dataProducto.getString("precio"));
 
                 id = dataProducto.getString("_id");
                 rev = dataProducto.getString("_rev");
@@ -116,21 +82,24 @@ public class agregar_producto extends Activity {
         }
     }
     private void mostrarProductos(){
-        Intent mostrarProductos = new Intent(agregar_producto.this, MainActivity.class);
+        Intent mostrarProductos = new Intent(agregar_productos.this, MainActivity.class);
         startActivity(mostrarProductos);
     }
     private void guardarProducto(){
-        TextView tempVal = findViewById(R.id.txtcodigo);
+        TextView tempVal = findViewById(R.id.txtCodigoProducto);
         String codigo = tempVal.getText().toString();
 
-        tempVal = findViewById(R.id.txtproducto);
+        tempVal = findViewById(R.id.txtNombreProducto);
         String nombre = tempVal.getText().toString();
 
-        tempVal = findViewById(R.id.txtmarca);
+        tempVal = findViewById(R.id.txtDescripcionProducto);
         String descripcion = tempVal.getText().toString();
 
-        tempVal = findViewById(R.id.txtpresentacion);
+        tempVal = findViewById(R.id.txtMarcaProducto);
         String marca = tempVal.getText().toString();
+
+        tempVal = findViewById(R.id.txtPrecioProducto);
+        String precio = tempVal.getText().toString();
 
         try {
             JSONObject datosProducto = new JSONObject();
@@ -142,6 +111,7 @@ public class agregar_producto extends Activity {
             datosProducto.put("nombre", nombre);
             datosProducto.put("descripcion", descripcion);
             datosProducto.put("marca", marca);
+            datosProducto.put("precio", precio);
 
             enviarDatosProducto objGuardarProducto = new enviarDatosProducto();
             objGuardarProducto.execute(datosProducto.toString());
@@ -210,7 +180,4 @@ public class agregar_producto extends Activity {
         }
     }
 }
-
-
-
 
