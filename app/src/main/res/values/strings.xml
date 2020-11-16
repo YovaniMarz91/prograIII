@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Sales</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="tab_text_1">Ventas</string>
+    <string name="tab_text_2">Estadisticas</string>
+    <string name="tab_text_3">Porductos</string>
+</resources>
