@@ -1,7 +1,11 @@
 package com.example.sales;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.sales.ui.main.Estadisticas;
+import com.example.sales.ui.main.Productos;
+import com.example.sales.ui.main.Ventas;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -15,7 +19,7 @@ import android.view.View;
 
 import com.example.sales.ui.main.SectionsPagerAdapter;
 
-public class MainActivity2 extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity implements Ventas.OnFragmentInteractionListener, Productos.OnFragmentInteractionListener, Estadisticas.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,4 +32,5 @@ public class MainActivity2 extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
 
     }
+
 }
